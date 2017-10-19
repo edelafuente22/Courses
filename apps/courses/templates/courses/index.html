@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Add a student to all bootcamp courses</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            table, th, td{
+                border: 1px solid black;
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="add">
+            <h1>Add a new course</h1>
+            <form action="/add_course" method='POST'>
+                {% csrf_token %}
+                Name: <input type="text" name="name"><br>
+                Description: <input type="textarea" name="desc"><br>
+                <input type="submit" value="Add">
+            </form>
+        </div>
+        <div id="courses">
+            <h1>Courses</h1>
+            <table>
+            <tr><th>Course Name</th><th>Description</th><th>Date Added</th><th>Actions</th></tr>
+            {% for course in courses %}
+                <tr><td>{{course.name}}</td><td>{{course.desc}}</td><td>{{course.created_at}}</td><td><a href="courses/{{course.id}}/remove_request">Remove</a> </td></tr><br>
+            {% endfor %}
+        </table>
+
+        </div>
+        
+    </body>
+</html>
